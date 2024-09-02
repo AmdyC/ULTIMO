@@ -1,0 +1,86 @@
+import React, { useState } from 'react';
+
+function App() {
+  const [number, setNumber] = useState('');
+  const [numberFact, setNumberFact] = useState('');
+  const [month, setMonth] = useState('');
+  const [day, setDay] = useState('');
+  const [year, setYear] = useState('');
+  const [dateFact, setDateFact] = useState('');
+  const [yearFact, setYearFact] = useState('');
+
+  const fetchNumberFact = async () => {
+    try {
+      const response = await fetch(`http://numbersapi.com/${number}?json`);
+      if (!response.ok) {
+        throw new Error('Error fetching data');
+      }
+      const data = await response.json();
+      setNumberFact(data.text);
+    } catch (error) {
+      setNumberFact('No fact available');
+    }
+  };
+
+  const fetchDateFacts = async () => {
+    try {
+      const dateResponse = await fetch(`http://numbersapi.com/${month}/${day}/date?json`);
+      const yearResponse = await fetch(`http://numbersapi.com/${year}/year?json`);
+      
+      if (!dateResponse.ok || !yearResponse.ok) {
+        throw new Error('Error fetching data');
+      }
+      
+      const dateData = await dateResponse.json();
+      const yearData = await yearResponse.json();
+      
+      setDateFact(dateData.text);
+      setYearFact(yearData.text);
+    } catch (error) {
+      setDateFact('No fact available');
+      setYearFact('No fact available');
+    }
+  };
+
+  return (
+    <div className="App">
+      <h1>Number Facts</h1>
+      <div>
+        <input
+          type="text"
+          value={number}
+          onChange={(e) => setNumber(e.target.value)}
+          placeholder="Enter a number"
+        />
+        <button onClick={fetchNumberFact}>Get Fact</button>
+        <p>{numberFact}</p>
+      </div>
+      <h1>Date Facts</h1>
+      <div>
+        <input
+          type="text"
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
+          placeholder="Enter month"
+        />
+        <input
+          type="text"
+          value={day}
+          onChange={(e) => setDay(e.target.value)}
+          placeholder="Enter day"
+        />
+        <input
+          type="text"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          placeholder="Enter year"
+        />
+        <button onClick={fetchDateFacts}>Get Facts</button>
+        <p>{dateFact}</p>
+        <p>{yearFact}</p>
+      </div>
+    </div>
+  );
+}
+
+export default App;
