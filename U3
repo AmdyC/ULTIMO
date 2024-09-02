@@ -1,0 +1,72 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function ExcuserApp() {
+  const [excuse, setExcuse] = useState('');
+  const [translatedExcuse, setTranslatedExcuse] = useState('');
+  const [category, setCategory] = useState('family');
+
+  // Función para obtener una excusa random al cargar la página
+  const getRandomExcuse = () => {
+    axios.get('https://excuser-three.vercel.app/v1/excuse')
+      .then(response => {
+        setExcuse(response.data[0].excuse);
+      })
+      .catch(error => console.error('Error fetching excuse:', error));
+  };
+
+  // Función para obtener una excusa de una categoría específica
+  const getCategoryExcuse = () => {
+    axios.get(`https://excuser-three.vercel.app/v1/excuse/${category}`)
+      .then(response => {
+        setExcuse(response.data[0].excuse);
+      })
+      .catch(error => console.error('Error fetching category excuse:', error));
+  };
+
+  // Función para traducir la excusa al español
+  const translateExcuse = () => {
+    axios.post('https://libretranslate.com/translate', {
+      q: excuse,
+      source: "en",
+      target: "es"
+    })
+      .then(response => {
+        setTranslatedExcuse(response.data.translatedText);
+      })
+      .catch(error => console.error('Error translating excuse:', error));
+  };
+
+  // useEffect para cargar una excusa random al montar el componente
+  useEffect(() => {
+    getRandomExcuse();
+  }, []);
+
+  // useEffect para traducir la excusa cada vez que cambie
+  useEffect(() => {
+    if (excuse) {
+      translateExcuse();
+    }
+  }, [excuse]);
+
+  return (
+    <div>
+      <h1>Generador de Excusas</h1>
+      <p>Excusa: {excuse}</p>
+      <p>Excusa traducida: {translatedExcuse}</p>
+      <div>
+        <label htmlFor="category">Selecciona una categoría:</label>
+        <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="family">Familia</option>
+          <option value="office">Oficina</option>
+          <option value="children">Niños</option>
+          <option value="college">Universidad</option>
+          <option value="party">Fiesta</option>
+        </select>
+        <button onClick={getCategoryExcuse}>Generar Excusa</button>
+      </div>
+    </div>
+  );
+}
+
+export default ExcuserApp;
