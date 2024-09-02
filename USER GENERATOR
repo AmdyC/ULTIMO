@@ -92,3 +92,25 @@ function UserList({ users, removeUser }) {
 
 function App() {
   const [users, set
+
+
+
+
+
+### Explicación del Código:
+
+1. **UserForm**: Este componente maneja el formulario para agregar un nuevo usuario. Cada campo de entrada actualiza su estado correspondiente (`name`, `lastName`, `age`, `phone`). Al enviar el formulario, si todos los campos están llenos, se agrega el usuario a la lista y se limpian los campos.
+
+2. **Formato del Número de Teléfono**: La función `formatPhoneNumber` se encarga de formatear el número de teléfono en el formato `xxx xxx-xxxx`.
+
+3. **UserList**: Este componente muestra la lista de usuarios y permite buscar usuarios por nombre. Los usuarios que coinciden con el término de búsqueda se muestran en la lista.
+
+4. **App**: Este es el componente principal que maneja el estado de la lista de usuarios y coordina la adición y eliminación de usuarios.
+
+### Funcionamiento:
+- **Agregar Usuario**: El formulario valida que todos los campos estén completos antes de agregar un usuario.
+- **Eliminar Usuario**: Cada usuario tiene un botón "Eliminar" que lo elimina de la lista.
+- **Buscar Usuarios**: Hay un campo de búsqueda que filtra la lista de usuarios por nombre.
+
+Este código proporciona una estructura básica y funcional para la aplicación de generación y manejo de usuarios que describiste. Puedes expandirla y estilizarla según tus necesidades.
+
