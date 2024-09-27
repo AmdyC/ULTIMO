@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+        html {
+            background-color: black;
+        }
+
+        #portada {
+            background-color: #A259FF !important;
+            z-index: -1;
+        }
+
+        #portada img {
+            width: 100%;
+            position: relative;
+            display: block;
+            -webkit-mask-image: linear-gradient(black, transparent);
+            mask-image: linear-gradient(black, transparent);
+        }
+
+        #info {
+            margin-top: 250px;
+            margin-left: 150px;
+            float: left;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 1000;
+            padding: 5px;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        #info h1 {
+            color: white;
+            letter-spacing: 3px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #info p {
+            margin-bottom: -20px;
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #info button {
+            color: black;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <main>
+        <div>
+            <div id="portada">
+                <img src="Imagenes/avengers.png" alt="">
+            </div>
+            <div id="info">
+                <p>Autor: Lorem</p>
+                <h1>Film name</h1>
+                <button>
+                    <eye style="color:#A259FF">👁</eye> Ver mas informacion
+                </button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
